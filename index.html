@@ -472,10 +472,11 @@
         /* Enhanced video positioning */
         .hero-background-video {
             position: absolute;
-            top: 0;
-            left: 0;
+            top: 50%;
+            left: 50%;
             width: 100%;
             height: 100%;
+            transform: translate(-50%, -50%);
             object-fit: cover;
             object-position: center;
             z-index: 1; /* Above background colors but below text content */
@@ -1432,6 +1433,16 @@
             transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
+        /* Enhanced fade-out for About Us section with smooth transitions */
+        .about-section {
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .about-section.is-fading-out {
+            opacity: 0;
+        }
+
         /* Section-level fade-out for immersive effect */
         .about-section.fade-out {
             filter: brightness(0.8) contrast(0.9) blur(0.5px);
@@ -1588,8 +1599,9 @@
     <!-- Hero Section -->
     <section id="home" class="section hero-section">
         <!-- Background Video -->
-        <video class="hero-background-video" autoplay muted playsinline>
-            <source src="zoominBOT.mp4" type="video/mp4">
+        <video class="hero-background-video" autoplay muted playsinline loop>
+            <source src="zoominBOT.mp4" type="video/mp4" media="(min-width: 769px)">
+            <source src="zoominBOT-mobile.mp4" type="video/mp4" media="(max-width: 768px)">
             Your browser does not support the video tag.
         </video>
         
@@ -3297,6 +3309,7 @@
                         // Remove fade-out effects first
                         const aboutSection = entry.target;
                         aboutSection.classList.remove('fade-out');
+                        aboutSection.classList.remove('is-fading-out');
                         aboutHeader.classList.remove('fade-out');
                         aboutStory.classList.remove('fade-out');
                         aboutPrinciples.classList.remove('fade-out');
@@ -3341,6 +3354,7 @@
                         // Section is out of view - add fade-out effect
                         const aboutSection = entry.target;
                         aboutSection.classList.add('fade-out');
+                        aboutSection.classList.add('is-fading-out');
                         aboutHeader.classList.add('fade-out');
                         aboutStory.classList.add('fade-out');
                         aboutPrinciples.classList.add('fade-out');
@@ -3359,6 +3373,35 @@
             if (aboutSection) {
                 aboutObserver.observe(aboutSection);
             }
+        }
+
+        // Enhanced About Us Section Fade-Out with Intersection Observer
+        function initializeAboutFadeOut() {
+            const aboutSection = document.querySelector('.about-section');
+            
+            if (!aboutSection) {
+                console.log('About section not found, skipping fade-out initialization');
+                return;
+            }
+
+            // Create intersection observer for smooth fade-out effect
+            const fadeOutObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.intersectionRatio < 0.9) {
+                        // Section is less than 90% visible - add fade-out class
+                        entry.target.classList.add('is-fading-out');
+                    } else {
+                        // Section is more than 90% visible - remove fade-out class
+                        entry.target.classList.remove('is-fading-out');
+                    }
+                });
+            }, {
+                threshold: [0.9, 1.0],
+                rootMargin: '0px 0px -10% 0px'
+            });
+
+            // Observe the about section
+            fadeOutObserver.observe(aboutSection);
         }
 
         // Counter animation function with easeOutExpo curve
@@ -3584,6 +3627,9 @@
             
             // Initialize About Us Section Animations
             initializeAboutAnimations();
+            
+            // Initialize About Us Section Fade-Out
+            initializeAboutFadeOut();
             
             // Initialize FAQ Section Animations
             initializeFAQAnimations();
