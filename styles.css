@@ -1110,7 +1110,15 @@ body.va-modal-open {
 
 .faq-answer.expanded {
     max-height: 300px;
-    padding: 0 32px 24px 32px;
+    padding: 0; /* Padding handled by .faq-answer-container */
+}
+
+/* FAQ Answer Inner Container for symmetric padding and readability */
+.faq-answer-container {
+    padding: 24px;
+    line-height: 1.6;
+    background: rgba(26, 28, 30, 0.4);
+    border-radius: 0 0 16px 16px;
 }
 
 .faq-answer blockquote {
@@ -1275,19 +1283,38 @@ body.va-modal-open {
     gap: 8px;
 }
 
-.contact-phone {
-    color: #DC143C; /* Crimson red */
-    text-decoration: none;
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    font-size: 16px;
-    transition: all 0.3s ease;
-    display: inline-block;
+/* Contact Info Card */
+.contact-info-card {
+    background-color: #181D23; /* Charcoal Graphite */
+    border-radius: 16px;
+    padding: 24px 32px;
+    border: 1px solid rgba(90, 61, 235, 0.3); /* Subtle Violet Border */
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
-.contact-phone:hover {
-    color: #B22222; /* Darker crimson on hover */
-    text-shadow: 0 0 8px rgba(220, 20, 60, 0.4);
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.contact-icon {
+    color: #AEB7C6;
+    flex-shrink: 0;
+}
+
+.contact-link {
+    color: #FAF5E9; /* Ivory Text */
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.contact-link:hover {
+    text-decoration: underline;
 }
 
 /* LinkedIn Section */
@@ -1719,6 +1746,18 @@ body.va-modal-open {
         max-width: 280px;
         text-align: center;
         min-height: 44px; /* Ensure tap-friendly size */
+    }
+
+    /* Disable autoplay video on mobile and use static image */
+    .hero-background-video {
+        display: none;
+    }
+
+    .hero-section {
+        background-image: url('startup_logo.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
     }
 }
 
