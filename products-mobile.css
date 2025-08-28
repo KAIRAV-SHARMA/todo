@@ -1,4 +1,4 @@
-/* Products Section - Mobile Optimization & Dark Palette */
+/* Products Section - Mobile Optimization & Dark Premium Palette */
 :root {
     /* Dark Premium Palette for Products Section */
     --bg-obsidian: #0A0D14;
@@ -281,6 +281,31 @@
     #products .card-title {
         font-size: clamp(20px, 4vw, 22px);
     }
+    
+    /* Mobile performance optimizations - prefer opacity + transform over filter/box-shadow */
+    #products .product-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+    
+    #products .card-cta:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 16px rgba(79, 70, 229, 0.3);
+    }
+    
+    /* Ensure all elements are visible on mobile */
+    #products .product-card,
+    #products .products-header,
+    #products .card-title,
+    #products .card-hook,
+    #products .card-description,
+    #products .feature-item,
+    #products .feature-text,
+    #products .feature-icon {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+    }
 }
 
 @media (max-width: 600px) {
@@ -350,7 +375,7 @@
     }
 }
 
-/* Reduced motion support for Products section */
+/* Enhanced reduced motion support for Products section */
 @media (prefers-reduced-motion: reduce) {
     #products .product-card,
     #products .products-header {
@@ -366,6 +391,11 @@
     #products .products-header {
         opacity: 1 !important;
         transform: none !important;
+    }
+    
+    #products .card-cta:hover {
+        transform: none !important;
+        box-shadow: none !important;
     }
 }
 

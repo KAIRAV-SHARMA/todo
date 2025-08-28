@@ -382,6 +382,56 @@ body {
     .container {
         padding: 0 24px;
     }
+    
+    /* Mobile optimizations - consolidated and optimized */
+    .product-card,
+    .section-title,
+    .section-intro,
+    .card-title,
+    .card-hook,
+    .card-description,
+    .feature-item,
+    .feature-text,
+    .feature-icon {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+    }
+    
+    /* Ensure CTAs are tap-friendly on mobile */
+    .card-cta {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-tap-highlight-color: rgba(79, 70, 229, 0.3);
+        touch-action: manipulation;
+        user-select: none;
+    }
+    
+    /* Mobile touch optimizations */
+    .product-card {
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+        overflow: visible;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .card-content {
+        position: relative;
+        z-index: 2;
+    }
+    
+    /* Mobile-specific spacing adjustments */
+    .products-grid {
+        gap: 20px;
+        margin-bottom: 60px;
+    }
+    
+    .product-card {
+        margin-bottom: 0;
+    }
 }
 
 @media (max-width: 480px) {
@@ -402,6 +452,57 @@ body {
         padding: 14px 28px;
         font-size: 0.95rem;
     }
+    
+    /* Extra small mobile optimizations */
+    .products-section {
+        padding: 60px 0;
+    }
+    
+    .products-grid {
+        gap: 16px;
+        margin-bottom: 40px;
+    }
+    
+    .product-card {
+        padding: 16px;
+        border-radius: 16px;
+    }
+    
+    .card-title {
+        font-size: 1.3rem;
+        margin-bottom: 12px;
+    }
+    
+    .card-hook {
+        font-size: 1rem;
+        margin-bottom: 16px;
+    }
+    
+    .card-description {
+        font-size: 0.9rem;
+        margin-bottom: 24px;
+    }
+    
+    .feature-item {
+        margin-bottom: 12px;
+        gap: 8px;
+    }
+    
+    .feature-text {
+        font-size: 0.85rem;
+    }
+    
+    .card-cta {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+        min-height: 44px;
+    }
+    
+    /* Ensure sufficient contrast on very small screens */
+    .product-card {
+        background: linear-gradient(135deg, rgba(15, 39, 71, 0.95) 0%, rgba(26, 26, 64, 0.98) 100%);
+        border-color: rgba(79, 70, 229, 0.5);
+    }
 }
 
 /* Animation Keyframes */
@@ -420,6 +521,18 @@ body {
 .revealed {
     opacity: 1 !important;
     transform: translateY(0) !important;
+}
+
+/* Mobile Fallback: Auto-reveal on mobile devices without JavaScript */
+@media (max-width: 768px) {
+    .product-card,
+    .section-title,
+    .section-intro,
+    .product-card * {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+    }
 }
 
 .fade-out {
@@ -1556,752 +1669,174 @@ body.va-modal-open {
     transform: translateY(8px) scale(0.98);
 }
 
-/* Responsive Design for FAQ and Contact */
+/* Mobile Overrides for Contact Section (≤768px) */
 @media (max-width: 768px) {
-    .faq-section,
-    .contact-section {
-        padding: 80px 24px;
+    /* Base rule currently centers the contact section. Add mobile overrides: */
+    .contact-section, .contact-container { 
+        text-align: left !important; 
     }
-    
-    .faq-container,
-    .contact-container {
-        max-width: 100%;
-    }
-    
-    .faq-question {
-        padding: 20px 24px;
-        font-size: 1rem;
-    }
-    
-    .faq-answer.expanded {
-        padding: 0 24px 20px 24px;
-    }
-    
-    .faq-answer blockquote {
-        font-size: 0.9rem;
-        padding-left: 16px;
-    }
-    
-    .contact-cta-button {
-        padding: 16px 32px;
-        font-size: 16px;
-    }
-    
-    /* Contact section responsive adjustments */
-    .contact-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-    
-    .contact-info {
-        text-align: left;
-        padding-left: 12px;
-        padding-right: 16px;
-    }
-    
-    .founders-info {
-        text-align: left;
-        padding-left: 12px;
-        padding-right: 16px;
-    }
-    
-    .contact-header {
-        margin-bottom: 60px;
-    }
-    
-    .contact-cta {
-        margin-top: 60px;
-    }
-}
 
-@media (max-width: 480px) {
-    .faq-title,
-    .contact-title {
-        font-size: 2rem;
+    .contact-info, .founders-info { 
+        text-align: left !important; 
     }
-    
-    .faq-intro,
-    .contact-intro {
-        font-size: 1rem;
+
+    /* For the grid, ensure one column on mobile and left alignment: */
+    .contact-grid { 
+        grid-template-columns: 1fr; 
+        justify-items: start; 
+        align-items: start; 
     }
-    
-    .faq-question {
-        padding: 16px 20px;
+
+    /* Ensure cards and "LinkedIn bars" don't force center: */
+    .contact-info-card, .founder-linkedin-bar, .linkedin-profile-link { 
+        justify-content: flex-start; 
     }
-    
-    .faq-answer.expanded {
-        padding: 0 20px 16px 20px;
-    }
-    
-    /* Contact section mobile adjustments */
+
+    /* Reduce any unintended horizontal padding that "looks" centered; keep consistent left padding (16–20px) */
     .contact-section {
-        padding: 60px 20px;
+        padding: 80px 20px;
     }
     
-    .contact-grid {
-        gap: 32px;
+    .contact-container {
+        padding: 0 16px;
     }
     
-    .contact-info {
-        padding-left: 12px;
-        padding-right: 16px;
+    .contact-info-card {
+        padding: 20px 20px;
     }
     
-    .founders-info {
-        padding-left: 12px;
-        padding-right: 16px;
-    }
-    
-    .contact-section-group {
-        margin-bottom: 32px;
-    }
-    
-    .founders-list {
-        gap: 20px;
-    }
-    
-    /* LinkedIn bars mobile adjustments */
     .founder-linkedin-bar {
-        padding: 10px 14px;
-        margin-top: 10px;
+        padding: 12px 16px;
+    }
+    
+    /* Keep the premium dark palette—avoid ivory/white blocks on mobile; use translucent indigo/graphite backgrounds instead */
+    .founder-linkedin-bar {
+        background: rgba(79, 70, 229, 0.1); /* Translucent indigo instead of ivory */
+        border: 1px solid rgba(79, 70, 229, 0.3);
+        color: #E3E7F9;
     }
     
     .linkedin-profile-link {
-        font-size: 13px;
-        gap: 10px;
+        color: #E3E7F9;
     }
     
-    .linkedin-icon {
-        width: 18px;
-        height: 18px;
-    }
-}
-
-/* Mobile Optimization Overrides - Following instu.md specifications */
-
-/* 1. Navigation Bar & Overlay - Mobile Responsive */
-@media (max-width: 1024px) {
-    .navbar {
-        height: 64px;
-        padding: 0 24px;
-    }
-
-    .nav-links {
-        display: none;
-    }
-
-    .mobile-menu-btn {
-        display: block;
-    }
-
-    .cta-button {
-        display: none;
-    }
-}
-
-@media (max-width: 768px) {
-    .navbar {
-        height: 56px;
-        padding: 0 16px;
-    }
-
-    .logo {
-        height: 38px;
-        font-size: 20px;
-    }
-}
-
-/* Mobile Overlay Enhancements */
-@media (max-width: 1024px) {
-    .mobile-overlay {
-        background: linear-gradient(135deg, var(--obsidian-black), var(--deep-navy));
-        backdrop-filter: blur(20px);
-    }
-
-    .mobile-nav-links {
-        margin-bottom: 48px;
-    }
-
-    .mobile-nav-links li {
-        margin: 16px 0;
-    }
-
-    .mobile-nav-links a {
-        line-height: 52px; /* 52px spacing as specified */
-        font-size: 20px;
-    }
-
-    .mobile-cta {
-        width: 100%;
-        max-width: 300px;
-        padding: 16px 32px;
-        font-size: 18px;
-        position: fixed;
-        bottom: 32px;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-}
-
-/* 2. Hero Section - Mobile Responsive */
-@media (max-width: 768px) {
-    .hero-section {
-        aspect-ratio: 16/9;
-        padding: 0 16px;
-    }
-    
-    .hero-content {
-        padding: 20px 16px 0 16px;
-    }
-    
-    .hero-hook {
-        font-size: clamp(1.4rem, 2.8vw, 2.2rem); /* Reduced by ~20% */
-    }
-    
-    .hero-ctas {
-        flex-direction: column;
-        align-items: center;
-        gap: 16px; /* 16px gap as specified */
-    }
-    
-    .hero-cta-primary,
-    .hero-cta-secondary {
-        width: 100%;
-        max-width: 280px;
-        text-align: center;
-        min-height: 44px; /* Ensure tap-friendly size */
-    }
-
-    /* Keep video visible on mobile with responsive styling */
-    .hero-background-video {
-        /* Ensure video remains visible and responsive on mobile */
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-        z-index: 1; /* Above background colors but below text content */
-        opacity: 0.8; /* Adjust opacity for better text visibility */
-        pointer-events: none; /* Prevent video interaction */
-        
-        /* Mobile video optimizations */
-        -webkit-transform: translateZ(0); /* Force hardware acceleration on iOS */
-        transform: translateZ(0);
-        will-change: transform; /* Optimize for animations */
-        
-        /* Ensure video covers properly on mobile */
-        min-width: 100%;
-        min-height: 100%;
-    }
-
-    .hero-section {
-        /* Keep background image as fallback only */
-        background-image: url('startup_logo.jpg');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        /* Ensure background image is behind video */
-        background-attachment: fixed;
-        
-        /* Mobile-specific hero section optimizations */
-        overflow: hidden; /* Prevent any potential overflow issues */
-    }
-    
-    /* Additional mobile video optimizations */
-    .hero-background-video {
-        /* Ensure video works well on all mobile devices */
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        
-        /* Mobile video rendering optimizations */
-        -webkit-backface-visibility: hidden;
-        backface-visibility: hidden;
-        -webkit-perspective: 1000;
-        perspective: 1000;
-        
-        /* Ensure video doesn't interfere with touch interactions */
-        touch-action: none;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero-hook {
-        font-size: clamp(1.2rem, 2.4vw, 1.8rem);
-    }
-    
-    .hero-subline {
-        font-size: clamp(0.8rem, 1.6vw, 0.9rem);
-    }
-    
-    .hero-cta-primary,
-    .hero-cta-secondary {
-        padding: 14px 24px;
-        font-size: 16px;
-    }
-    
-    /* Additional small mobile video optimizations */
-    .hero-background-video {
-        /* Ensure video works well on very small screens */
-        object-position: center center;
-        
-        /* Optimize for small mobile devices */
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-    }
-}
-
-/* 3. Products Section - Mobile Responsive */
-@media (max-width: 1024px) {
-    .products-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 24px;
-    }
-}
-
-@media (max-width: 768px) {
-    .products-section {
-        padding: 80px 24px;
-    }
-
-    .products-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
-    }
-
-    .products-header {
-        margin-bottom: 60px;
-    }
-
-    .product-card {
-        padding: 24px;
-    }
-}
-
-@media (max-width: 480px) {
-    .products-title {
-        font-size: clamp(1.8rem, 3.2vw, 2rem); /* 2rem max as specified */
-    }
-    
-    .product-card {
-        padding: 20px; /* Reduced from 24px to 20px */
-    }
-    
-    .card-cta {
-        padding: 12px 24px; /* Shrink padding */
-        font-size: 14px;
-    }
-}
-
-/* 4. About Section - Mobile Responsive */
-@media (max-width: 768px) {
-    .about-section {
-        padding: 80px 24px;
-    }
-
-    .about-grid {
-        grid-template-columns: 1fr;
-        gap: 48px;
-        text-align: center;
-    }
-
-    .about-story {
-        text-align: center;
-    }
-
-    .about-principles {
-        text-align: center;
-    }
-
-    .about-counters {
-        grid-template-columns: 1fr;
-        gap: 32px; /* 32px gap as specified */
-    }
-
-    .about-header {
-        margin-bottom: 60px;
-    }
-
-    .about-grid {
-        margin-bottom: 60px;
-    }
-
-    .about-counters {
-        margin-top: 60px;
-    }
-}
-
-@media (max-width: 480px) {
-    .about-title {
-        font-size: clamp(1.8rem, 3.2vw, 2rem);
-    }
-    
-    .story-title,
-    .principles-title {
-        font-size: clamp(1.4rem, 2.2vw, 1.6rem);
-    }
-    
-    .story-text,
-    .principle-description {
-        font-size: clamp(0.9rem, 1.1vw, 1rem);
-    }
-}
-
-/* 5. FAQ Section - Mobile Responsive */
-@media (max-width: 768px) {
-    .faq-section {
-        padding: 80px 24px;
-    }
-    
-    .faq-container {
-        max-width: 100%;
-    }
-    
-    .faq-question {
-        padding: 20px 24px;
-        font-size: 1rem;
-        min-height: 44px; /* Ensure tap-friendly size */
-    }
-    
-    .faq-answer.expanded {
-        padding: 0 24px 20px 24px;
-    }
-    
-    .faq-answer blockquote {
-        font-size: 0.9rem;
-        padding-left: 16px;
-    }
-}
-
-@media (max-width: 480px) {
-    .faq-section {
-        padding: 60px 20px;
-    }
-    
-    .faq-question {
-        padding: 16px 20px; /* Reduced to 20px as specified */
-        font-size: 0.95rem;
-    }
-    
-    .faq-answer.expanded {
-        padding: 0 20px 16px 20px;
-    }
-    
-    .faq-title {
-        font-size: clamp(1.8rem, 3.2vw, 2rem);
-    }
-    
-    .faq-intro {
-        font-size: 1rem;
-    }
-}
-
-/* 6. Contact Section - Mobile Responsive */
-@media (max-width: 768px) {
-    .contact-section {
-        padding: 80px 24px;
-    }
-    
-    .contact-container {
-        max-width: 100%;
-    }
-    
-    .contact-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-    
-    .contact-info {
-        text-align: left;
-    }
-    
-    .founders-info {
-        text-align: left;
-    }
-    
+    /* Ensure all Contact text, cards, and links start from the left edge (with normal section padding) */
     .contact-header {
+        text-align: left;
         margin-bottom: 60px;
-    }
-    
-    .contact-cta {
-        margin-top: 60px;
-    }
-    
-    .founders-list {
-        gap: 24px; /* 24px spacing as specified */
-    }
-}
-
-@media (max-width: 480px) {
-    .contact-section {
-        padding: 60px 20px;
-    }
-    
-    .contact-grid {
-        gap: 32px;
-    }
-    
-    .contact-section-group {
-        margin-bottom: 32px;
-    }
-    
-    .founders-list {
-        gap: 20px;
     }
     
     .contact-title {
-        font-size: clamp(1.8rem, 3.2vw, 2rem);
+        text-align: left;
     }
     
     .contact-intro {
-        font-size: 1rem;
+        text-align: left;
+        margin-left: 0;
+        margin-right: 0;
     }
     
-    /* Ensure emails and phones remain tappable */
+    /* Ensure no elements snap back to center at any scroll point */
+    .contact-section * {
+        text-align: inherit;
+    }
+    
+    /* Tap targets remain ≥44px */
     .contact-email,
-    .contact-phone {
-        font-size: 16px; /* Prevent zoom on iOS */
-        padding: 8px 0;
+    .contact-link,
+    .founder-link,
+    .linkedin-profile-link {
         min-height: 44px;
         display: inline-flex;
         align-items: center;
     }
     
-    /* LinkedIn bars mobile adjustments */
+    .contact-info-card {
+        min-height: 44px;
+    }
+    
     .founder-linkedin-bar {
-        padding: 10px 14px;
-        margin-top: 10px;
-    }
-    
-    .linkedin-profile-link {
-        font-size: 13px;
-        gap: 10px;
-    }
-    
-    .linkedin-icon {
-        width: 18px;
-        height: 18px;
-    }
-}
-
-/* 7. Book a Demo Modal - Mobile Responsive */
-@media (max-width: 767px) {
-    .modal-container {
-        margin: 0 16px;
-        transform: translate(-50%, calc(-50% + 12px));
-    }
-    
-    .modal-content {
-        padding: 24px;
-        border-radius: 20px;
-        max-height: 85vh; /* 85vh as specified */
-    }
-    
-    .modal-header h2 {
-        font-size: 24px;
-    }
-    
-    .phone-group,
-    .time-group {
-        flex-direction: column; /* Collapse to vertical layout */
-        gap: 8px;
-    }
-    
-    .phone-group select {
-        flex: none;
-    }
-    
-    .submit-btn {
-        padding: 0 24px;
-        height: 44px;
-        width: 100%; /* Full width as specified */
-    }
-    
-    .demo-form {
-        gap: 20px;
-    }
-}
-
-@media (max-width: 480px) {
-    .modal-content {
-        padding: 20px;
-        max-height: 90vh;
-    }
-    
-    .modal-header h2 {
-        font-size: 22px;
-    }
-    
-    .form-group input,
-    .form-group select {
-        padding: 14px;
-        font-size: 16px; /* Prevent zoom on iOS */
-    }
-    
-    .submit-btn {
-        height: 48px; /* Ensure tap-friendly size */
-        font-size: 16px;
-    }
-}
-
-/* 8. Orb & Background Morph System - Mobile Optimization */
-@media (max-width: 768px) {
-    .orb {
-        width: 3.5px !important; /* Reduced from 5px to 3.5px */
-        height: 3.5px !important;
-    }
-}
-
-/* Ensure smooth background morphing on mobile */
-@media (max-width: 1024px) {
-    body {
-        transition: background-color 0.2s ease; /* Faster transition for mobile */
-    }
-    
-    html {
-        transition: background-color 0.2s ease;
-    }
-}
-
-/* Additional Mobile Optimizations */
-
-/* Ensure no horizontal scrolling */
-@media (max-width: 768px) {
-    body {
-        overflow-x: hidden;
-    }
-    
-    .section {
-        overflow-x: hidden;
-    }
-}
-
-/* Typography scaling with clamp() for better readability */
-@media (max-width: 768px) {
-    .section-title {
-        font-size: clamp(2rem, 4vw, 2.5rem);
-    }
-    
-    .section-intro {
-        font-size: clamp(1rem, 1.5vw, 1.1rem);
-    }
-    
-    .card-title {
-        font-size: clamp(1.3rem, 2.2vw, 1.5rem);
-    }
-    
-    .card-hook {
-        font-size: clamp(0.95rem, 1.2vw, 1rem);
-    }
-    
-    .card-description {
-        font-size: clamp(0.85rem, 1vw, 0.9rem);
-    }
-}
-
-/* Ensure all CTAs are tap-friendly */
-@media (max-width: 768px) {
-    .cta-button,
-    .hero-cta-primary,
-    .hero-cta-secondary,
-    .card-cta,
-    .section-cta-button,
-    .contact-cta-button,
-    .submit-btn {
-        min-height: 44px; /* Ensure tap-friendly size */
-        padding: 12px 24px;
-    }
-    
-    .mobile-menu-btn,
-    .close-menu {
         min-height: 44px;
-        min-width: 44px;
     }
 }
 
-/* Enhanced mobile navigation experience */
-@media (max-width: 1024px) {
-    .mobile-overlay {
-        padding: 32px 24px;
-    }
-    
-    .mobile-nav-links a {
-        font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-        line-height: 52px;
-    }
-    
-    .mobile-cta {
-        font-size: clamp(1rem, 2.2vw, 1.1rem);
-        padding: 16px 24px;
-    }
-}
-
-/* Optimize animations for mobile performance */
+/* Performance optimizations - prefer opacity + transform over filter/box-shadow on mobile */
 @media (max-width: 768px) {
-    .product-card,
-    .principle-card,
-    .faq-item,
-    .founder-item {
-        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Faster transitions */
-    }
-    
-    /* Reduce animation complexity on mobile */
-    .product-card:hover,
-    .principle-card:hover,
-    .faq-item:hover {
+    .product-card:hover {
         transform: translateY(-2px);
-    }
-}
-
-/* Ensure proper spacing and touch targets */
-@media (max-width: 480px) {
-    .section {
-        padding: 60px 20px;
+        /* Remove heavy box-shadow animations on mobile */
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
     }
     
-    .container {
-        padding: 0 20px;
+    .card-cta:hover {
+        transform: translateY(-1px);
+        /* Remove heavy box-shadow animations on mobile */
+        box-shadow: 0 4px 16px rgba(79, 70, 229, 0.3);
     }
     
-    /* Increase touch targets for better mobile UX */
-    .feature-item {
-        padding: 8px 0;
-        min-height: 44px;
+    .section-cta-button:hover {
+        transform: translateY(-1px);
+        /* Remove heavy box-shadow animations on mobile */
+        box-shadow: 0 4px 16px rgba(79, 70, 229, 0.3);
     }
     
-    .faq-question {
-        min-height: 48px;
-    }
-}
-
-/* High contrast mode support for mobile */
-@media (prefers-contrast: high) and (max-width: 768px) {
-    .hero-background-overlay {
-        background: rgba(0, 0, 0, 0.9) !important;
-    }
-    
-    .product-card,
-    .principle-card,
-    .faq-item {
-        border-color: rgba(255, 255, 255, 0.3) !important;
-    }
-}
-
-/* Reduced motion support for mobile */
-@media (prefers-reduced-motion: reduce) and (max-width: 768px) {
-    .product-card,
-    .principle-card,
-    .faq-item,
-    .founder-item,
-    .hero-content,
+    /* Optimize orb animations for mobile */
     .orb {
-        transition: none !important;
-        animation: none !important;
+        /* Reduce filter effects on mobile for better performance */
+        filter: brightness(1.05) contrast(1.02);
+        box-shadow: 
+            0 0 2px rgba(255, 255, 255, 0.6),
+            0 0 4px rgba(255, 255, 255, 0.4);
+    }
+}
+
+/* Enhanced reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    /* Disable all non-essential animations */
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
     
-    .hero-background-overlay {
+    /* Disable transform animations */
+    .product-card:hover,
+    .card-cta:hover,
+    .section-cta-button:hover,
+    .faq-item:hover,
+    .principle-card:hover,
+    .founder-linkedin-bar:hover {
+        transform: none !important;
+    }
+    
+    /* Disable filter animations */
+    .product-card:hover,
+    .card-cta:hover,
+    .section-cta-button:hover {
+        filter: none !important;
+        box-shadow: none !important;
+    }
+    
+    /* Disable orb animations */
+    .orb {
+        animation: none !important;
         transition: none !important;
+    }
+    
+    /* Ensure all elements are visible without animations */
+    .product-card,
+    .section-title,
+    .section-intro,
+    .faq-item,
+    .principle-card,
+    .founder-item {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+    
+    /* Disable scroll-triggered animations */
+    .revealed {
+        opacity: 1 !important;
+        transform: none !important;
     }
 }
