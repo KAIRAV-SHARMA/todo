@@ -19,6 +19,17 @@
 /* CSS Variables for Background Morphing */
 :root {
     --bg-color: #0B0B0C;
+    /* Dark Premium Palette for Products Section */
+    --bg-obsidian: #0A0D14;
+    --indigo-600: #4F46E5;
+    --indigo-500: #6366F1;
+    --violet-500: #7C3AED;
+    --text-hi: #E6E9FF;
+    --text-mid: #C9D1FF;
+    --text-subtle: #9AA8FF;
+    --card-bg: rgba(30, 36, 64, 0.65);
+    --card-border: rgba(79, 70, 229, 0.3);
+    --card-shadow: rgba(0, 0, 0, 0.3);
 }
 
 html {
@@ -1580,15 +1591,18 @@ body.va-modal-open {
     .contact-grid {
         grid-template-columns: 1fr;
         gap: 40px;
-        text-align: center;
     }
     
     .contact-info {
-        text-align: center;
+        text-align: left;
+        padding-left: 12px;
+        padding-right: 16px;
     }
     
     .founders-info {
-        text-align: center;
+        text-align: left;
+        padding-left: 12px;
+        padding-right: 16px;
     }
     
     .contact-header {
@@ -1626,6 +1640,16 @@ body.va-modal-open {
     
     .contact-grid {
         gap: 32px;
+    }
+    
+    .contact-info {
+        padding-left: 12px;
+        padding-right: 16px;
+    }
+    
+    .founders-info {
+        padding-left: 12px;
+        padding-right: 16px;
     }
     
     .contact-section-group {
@@ -1748,16 +1772,58 @@ body.va-modal-open {
         min-height: 44px; /* Ensure tap-friendly size */
     }
 
-    /* Disable autoplay video on mobile and use static image */
+    /* Keep video visible on mobile with responsive styling */
     .hero-background-video {
-        display: none;
+        /* Ensure video remains visible and responsive on mobile */
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        z-index: 1; /* Above background colors but below text content */
+        opacity: 0.8; /* Adjust opacity for better text visibility */
+        pointer-events: none; /* Prevent video interaction */
+        
+        /* Mobile video optimizations */
+        -webkit-transform: translateZ(0); /* Force hardware acceleration on iOS */
+        transform: translateZ(0);
+        will-change: transform; /* Optimize for animations */
+        
+        /* Ensure video covers properly on mobile */
+        min-width: 100%;
+        min-height: 100%;
     }
 
     .hero-section {
+        /* Keep background image as fallback only */
         background-image: url('startup_logo.jpg');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
+        /* Ensure background image is behind video */
+        background-attachment: fixed;
+        
+        /* Mobile-specific hero section optimizations */
+        overflow: hidden; /* Prevent any potential overflow issues */
+    }
+    
+    /* Additional mobile video optimizations */
+    .hero-background-video {
+        /* Ensure video works well on all mobile devices */
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        
+        /* Mobile video rendering optimizations */
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-perspective: 1000;
+        perspective: 1000;
+        
+        /* Ensure video doesn't interfere with touch interactions */
+        touch-action: none;
     }
 }
 
@@ -1774,6 +1840,16 @@ body.va-modal-open {
     .hero-cta-secondary {
         padding: 14px 24px;
         font-size: 16px;
+    }
+    
+    /* Additional small mobile video optimizations */
+    .hero-background-video {
+        /* Ensure video works well on very small screens */
+        object-position: center center;
+        
+        /* Optimize for small mobile devices */
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
     }
 }
 
@@ -1935,15 +2011,14 @@ body.va-modal-open {
     .contact-grid {
         grid-template-columns: 1fr;
         gap: 40px;
-        text-align: center;
     }
     
     .contact-info {
-        text-align: center;
+        text-align: left;
     }
     
     .founders-info {
-        text-align: center;
+        text-align: left;
     }
     
     .contact-header {
